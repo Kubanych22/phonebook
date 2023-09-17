@@ -84,6 +84,7 @@ const data = [
     thead.insertAdjacentHTML('beforeend', `
       <tr>
         <th class="delete">Удалить</th>
+        <th class="edit"></th>
         <th>Имя</th>
         <th>Фамилия</th>
         <th>Телефон</th>
@@ -147,6 +148,11 @@ const data = [
     const buttonDel = document.createElement('button');
     buttonDel.classList.add('del-icon');
     tdDel.append(buttonDel);
+    const tdEdit = document.createElement('td');
+    tdEdit.classList.add('edit');
+    const buttonEdit = document.createElement('button');
+    buttonEdit.classList.add('edit-icon');
+    tdEdit.append(buttonEdit);
     
     const tdName = document.createElement('td');
     tdName.textContent = firstName;
@@ -156,15 +162,17 @@ const data = [
     const phoneLink = document.createElement('a');
     phoneLink.href = `tel:${phone}`;
     phoneLink.textContent = phone;
+    tr.phoneLink = phoneLink;
     tdPhone.append(phoneLink);
     
-    tr.append(tdDel, tdName, tdSurname, tdPhone);
+    tr.append(tdDel, tdEdit, tdName, tdSurname, tdPhone);
     return tr;
   };
   
   const renderContacts = (elem, data) => {
     const allRow = data.map(createRow);
     elem.append(...allRow);
+    return allRow;
   };
   
   const createFooter = () => {
@@ -183,7 +191,7 @@ const data = [
     const main = createMain();
     const buttonGroup = createButtonsGroup([
       {
-        className: 'btn btn-primary mr-3',
+        className: 'btn btn-primary mr-3 js-add',
         type: 'button',
         text: 'Добавить',
       },
@@ -202,17 +210,50 @@ const data = [
     app.append(header, main, footer);
     return {
       list: table.tbody,
+      logo,
+      btnAdd: buttonGroup.btns[0],
+      formOverlay: form.overlay,
+      form: form.form,
     };
   };
-
+  
+  const hoverRow = (allRow, logo) => {
+    const text = logo.textContent;
+    allRow.forEach(contact => {
+      contact.addEventListener('mouseenter', () => {
+        logo.textContent = contact.phoneLink.textContent;
+      });
+      contact.addEventListener('mouseleave', () => {
+        logo.textContent = text;
+      });
+    });
+  };
+  
   window.phoneBookInit = (selectorApp, title) => {
     const app = document.querySelector(selectorApp);
     const phoneBook = renderPhoneBook(app, title);
     
-    const {list} = phoneBook;
-    
-    renderContacts(list, data);
+    const {list, logo, btnAdd, formOverlay, form} = phoneBook;
     
     // функционал
+    
+    const allRow = renderContacts(list, data);
+    hoverRow(allRow, logo);
+
+    btnAdd.addEventListener('click', () => {
+      formOverlay.classList.add('is-visible');
+    });
+    
+    form.addEventListener('click', (event) => {
+      event.stopPropagation();
+      const btnClose = event.target.closest('.close');
+      if (btnClose) {
+        formOverlay.classList.remove('is-visible');
+      }
+    });
+    
+    formOverlay.addEventListener('click', () => {
+      formOverlay.classList.remove('is-visible');
+    });
   };
 }
