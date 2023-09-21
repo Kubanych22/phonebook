@@ -28,11 +28,10 @@ body {
 
 .del-icon {
   display: block;
+  margin: 0 auto;
   width: 10px;
   height: 10px;
   padding: 16px 7px;
-  /*width: 14px;*/
-  /*height: 14px;*/
   border: none;
   background-color: transparent;
   background-image: url("../img/del.svg");
@@ -47,7 +46,7 @@ body {
 
 .edit-icon {
   display: block;
-  margin-left: auto;
+  margin: 0 auto;
   padding: 14px 10px 10px;
   width: 16px;
   height: 16px;

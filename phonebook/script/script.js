@@ -95,7 +95,7 @@ const data = [
     thead.insertAdjacentHTML('beforeend', `
       <tr>
         <th class="delete">Удалить</th>
-        <th class="edit"></th>
+        <th class="edit">Редактировать</th>
         <th>Имя</th>
         <th>Фамилия</th>
         <th>Телефон</th>
