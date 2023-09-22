@@ -303,13 +303,8 @@ const data = [
       let tableRows = list.querySelectorAll('tr');
       
       const sortColumns = [...tableRows].sort((a, b) => {
-        if (sortedCol === 2) {
-          a = a.childNodes[sortedCol].closest('.first-name').textContent;
-          b = b.childNodes[sortedCol].closest('.first-name').textContent;
-        } else {
-          a = a.childNodes[sortedCol].closest('.surname').textContent;
-          b = b.childNodes[sortedCol].closest('.surname').textContent;
-        }
+        a = a.childNodes[sortedCol].textContent;
+        b = b.childNodes[sortedCol].textContent;
         return a >= b ? 1 : -1;
       });
       
