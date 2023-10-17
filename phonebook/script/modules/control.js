@@ -1,5 +1,6 @@
 import {addContactData, removeStorage} from './serviceStorage.js';
 import {createRow} from './createElements.js';
+import {keyLocalStorage as key} from '../script.js';
 
 export {modalControl, addContactPage, checkDeleteButtonPressed,
   checkPhone, formControl, deleteControl};
@@ -40,7 +41,7 @@ const checkDeleteButtonPressed = (list) => {
 const checkPhone = (list, newContact) => {
   const elems = list.querySelectorAll('a');
   const phones = [...elems].map(p => p.textContent);
-  const phone = newContact.phone;
+  const {phone} = newContact;
   if (phones.includes(phone)) {
     alert('Такой телефон уже имеется');
     return true;
@@ -52,9 +53,10 @@ const formControl = (form, list, closeModal) => {
   form.addEventListener('submit', (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
-    const newContact = Object.fromEntries(formData);
-    
-    checkDeleteButtonPressed(list);
+    const newContact = Object.fromEntries(formData);    
+    if (localStorage.getItem(key)) {     
+      checkDeleteButtonPressed(list);
+    } 
     
     if(!checkPhone(list, newContact)) {
       addContactPage(newContact, list);
