@@ -1,4 +1,4 @@
-import {data, keyLocalStorage as key} from '../script.js';
+import {data, keyLocalStorage as key} from '../index.js';
 
 export {removeStorage, addContactData, getContactData};
 

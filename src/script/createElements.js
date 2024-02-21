@@ -1,3 +1,11 @@
+import image from '../img/icon.svg';
+
+export const createImageLogo = () => {
+  const img = document.createElement('img');
+  img.src = image;
+  return img;
+}
+
 export {createContainer, createHeader, createLogo, createMain,
   createButtonsGroup, createTable, createForm, createFooter};
 

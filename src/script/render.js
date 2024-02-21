@@ -1,5 +1,6 @@
 import {
-  createButtonsGroup, 
+  createImageLogo,
+  createButtonsGroup,
   createFooter,
   createForm,
   createHeader,
@@ -25,6 +26,7 @@ const renderContacts = (list, data) => {
 
 const renderPhoneBook = (app, title) => {
   const header = createHeader();
+  const imageLogo = createImageLogo();
   const logo = createLogo(title);
   const main = createMain();
   const buttonGroup = createButtonsGroup([
@@ -41,7 +43,7 @@ const renderPhoneBook = (app, title) => {
   ]);
   
   const table = createTable();
-  header.headerContainer.append(logo);
+  header.headerContainer.append(imageLogo, logo);
   const {form, overlay} = createForm();
   main.mainContainer.append(buttonGroup.btnWrapper, table, overlay);
   const footer = createFooter();

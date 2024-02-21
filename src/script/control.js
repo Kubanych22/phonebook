@@ -1,6 +1,6 @@
 import {addContactData, removeStorage} from './serviceStorage.js';
 import {createRow} from './createElements.js';
-import {keyLocalStorage as key} from '../script.js';
+import {keyLocalStorage as key} from '../index.js';
 
 export {modalControl, addContactPage, checkDeleteButtonPressed,
   checkPhone, formControl, deleteControl};
@@ -53,10 +53,10 @@ const formControl = (form, list, closeModal) => {
   form.addEventListener('submit', (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
-    const newContact = Object.fromEntries(formData);    
-    if (localStorage.getItem(key)) {     
+    const newContact = Object.fromEntries(formData);
+    if (localStorage.getItem(key)) {
       checkDeleteButtonPressed(list);
-    } 
+    }
     
     if(!checkPhone(list, newContact)) {
       addContactPage(newContact, list);

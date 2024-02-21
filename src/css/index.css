@@ -1,5 +1,10 @@
+@import "normalize.css";
+@import "fonts.css";
+@import "bootstrap.css";
+
 body {
   min-width: 420px;
+  font-family: Montserrat, sans-serif;
 }
 
 .header {
